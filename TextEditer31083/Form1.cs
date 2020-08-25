@@ -116,6 +116,7 @@ namespace TextEditer31083
         //マスク
         private void rtTextArea_TextChanged(object sender, EventArgs e)
         {
+
             if (rtTextArea.CanUndo)
             {
                 UndoToolStripMenuItem.Enabled = true;
@@ -145,14 +146,7 @@ namespace TextEditer31083
                 CopyCToolStripMenuItem.Enabled = true;
                 DeleteToolStripMenuItem.Enabled = true;
             }
-            if (Clipboard.ContainsText() == true)
-            {
-                PasteToolStripMenuItem.Enabled = true;
-            } 
-            else
-            {
-                PasteToolStripMenuItem.Enabled = false;
-            }
+            PasteToolStripMenuItem.Enabled = Clipboard.GetDataObject().GetDataPresent(DataFormats.Rtf);
         }
 
         //色
@@ -173,6 +167,7 @@ namespace TextEditer31083
             }
         }
 
+        //編集メニュークリックイベントハンドラ
         private void EditToolStripMenuItem_Click(object sender, EventArgs e)
         {
             rtTextArea_TextChanged(sender, e);
